@@ -21,6 +21,7 @@ it('should pass callback to parent on + click', () => {
     const playerComponent = shallow(
         <Player onPlayerScoreChange={mockedOnPlayerScoreChange} />
     );
+    
     const plusButton = playerComponent.find('.Player__button_add');
     plusButton.simulate('click');
 
@@ -31,8 +32,20 @@ it('should pass callback to parent on - click', () => {
     const playerComponent = shallow(
         <Player onPlayerScoreChange={mockedOnPlayerScoreChange} />
     );
-    const plusButton = playerComponent.find('.Player__button_subtract');
-    plusButton.simulate('click');
+
+    const minusButton = playerComponent.find('.Player__button_subtract');
+    minusButton.simulate('click');
 
     expect(mockedOnPlayerScoreChange).toBeCalledWith(-1);
+});
+it('should pass callback to parent on X click', () => {
+    const mockedOnPlayerRemove = jest.fn();
+    const playerComponent = shallow(
+        <Player onPlayerRemove={mockedOnPlayerRemove} />
+    );
+
+    const xButton = playerComponent.find('.Player_button_delete');
+    xButton.simulate('click');
+
+    expect(mockedOnPlayerRemove).toBeCalled();
 });

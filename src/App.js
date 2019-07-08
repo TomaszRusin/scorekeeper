@@ -8,16 +8,7 @@ class App extends Component {
     super();
 
     this.state = {
-      players: [
-        {
-          name: 'Kundegunda',
-          score: 0,
-        },
-        {
-          name: 'Antoś',
-          score: 0,
-        }
-      ]
+      players: []
     }
   };
 
@@ -43,11 +34,23 @@ onPlayerAdd = (name) => {
   })
 }
 
+onPlayerRemove = (playerIndex) => {
+  this.state.players.splice(playerIndex, 1)
+  var newPlayers = this.state.players
+  this.setState({
+    players: newPlayers
+  })
+}
+
   render() {
     return (
       <div className="App">
         <AddPlayer onPlayerAdd={this.onPlayerAdd}/>
-        <PlayersList players={this.state.players} onScoreUpdate={this.onScoreUpdate}/>
+        <PlayersList 
+          players={this.state.players} 
+          onScoreUpdate={this.onScoreUpdate}
+          onPlayerRemove={this.onPlayerRemove}
+        />
       </div>
     );
   }
